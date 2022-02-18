@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main">
+    <div class="display"> <button class=" btn dark_mode_btn"><label class="switch">
+        
+        <span class="slider round"></span>
+   
+      </label>
+   
+    </button>
+        <p id="history"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;Action</p>
+        <h2 id="result"></h2>
+    </div>
+    <div class="buttons"> <button id="clear">C</button> <button id="delete_single_num"><i class="fa fa-scissors" aria-hidden="true"></i></button> <button id="Normal_btn">/</button> <button id="Normal_btn">*</button> </div>
+    <div class="buttons"> <button id="Normal_btn">7</button> <button id="Normal_btn">8</button> <button id="Normal_btn">9</button> <button id="Normal_btn">-</button> </div>
+    <div class="buttons"> <button id="Normal_btn">4</button> <button id="Normal_btn">5</button> <button id="Normal_btn">6</button> <button id="Normal_btn">+</button> </div>
+    <div class="buttons"> <button id="Normal_btn">1</button> <button id="Normal_btn">2</button> <button id="Normal_btn">3</button> <button id="Normal_btn">.</button> </div>
+    <div class="buttons"> <button id="Normal_btn">0</button> <button id="Normal_btn">00</button> <button id="equalTo">=</button> </div>
+</div>
+<script>
+
+document.addEventListener("DOMContentLoaded", function(event) {
+let body = document.querySelector('body');
+let result = document.querySelector('#result');
+
+let dark_mode_btn = document.querySelector('.dark_mode_btn');
+let clear = document.querySelector('#clear');
+let history = document.querySelector('#history');
+let equalTo = document.querySelector('#equalTo');
+let delete_single_num = document.querySelector('#delete_single_num');
+
+let Normal_btn = document.querySelectorAll('#Normal_btn');
+
+
+let initial_value = "";
+
+Normal_btn.forEach((Normal_btn, index)=>{
+Normal_btn.addEventListener('click', function(){
+let text = this.innerHTML;
+initial_value += text;
+result.innerHTML = initial_value;
+});
+});
+
+/*equal to button action*/
+equalTo.addEventListener('click', function(){
+if (result.innerHTML != "") {
+history.innerHTML = result.innerHTML;
+result.innerHTML = eval(result.innerHTML);
+initial_value = eval(result.innerHTML);
+}else{
+alert('please enter any Number');
+}
+});
+
+
+/*dark_mode*/
+let dark_mode_status = false;
+dark_mode_btn.addEventListener('click', function(){
+body.classList.toggle('dark_mode_active');
+if (dark_mode_status == false) {
+this.innerHTML = '<i class="fa fa-sun-o" aria-hidden="true"></i>';
+dark_mode_status = true;
+}else{
+this.innerHTML = '<i class="fa fa-moon-o" aria-hidden="true"></i>';
+dark_mode_status = false;
+}
+});
+
+
+/*clear all number*/
+clear.addEventListener('click', function(){
+result.innerHTML = "";
+initial_value = "";
+});
+
+/*delete single number*/
+delete_single_num.addEventListener('click', function(){
+result.innerHTML = result.innerHTML.substring(0,result.innerHTML.length-1);
+initial_value = result.innerHTML;
+});
+
+});
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
